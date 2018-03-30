@@ -40,6 +40,12 @@ input {
   height: 30px;
 }
 
+.inputs-styling::placeholder {
+  font-size: 1.5em;
+  padding-left: 10px;
+  color: #939598;
+}
+
 .submit-button {
   width: 100%;
   height: 35px;
