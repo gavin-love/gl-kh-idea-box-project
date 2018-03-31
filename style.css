@@ -1,13 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
 html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-right;
+  box-sizing: border-box;
 }
 
 .top {
@@ -23,7 +18,7 @@ html, body {
 
 /*Title, inputs, and submit button*/
 
-h1 {
+.title-idea {
   width: 50%;
   text-align: center;
   margin: 0 auto 25px auto;
@@ -31,7 +26,7 @@ h1 {
   color: #00A79D;
 }
 
-span {
+.title-box {
   color: #6D6E71;
 }
 
@@ -68,17 +63,64 @@ input {
 .bottom {
   height: 100vh;
   width: 100%;
-  margin: 0 auto;
-  /*background-color: #939598;*/
+  padding: 25px 0 25px 0;
+  background-color: #939598;
 }
+
+.search-container {
+  width: 50%;
+  margin: auto;
+}
+
 
 .cards-container {
   height: 100vh;
   width: 50%;
-  /*background-color: #FFFFFF;*/
-  margin: 0 auto;
+  background-color: #FFFFFF;
+  margin: auto;
 }
 
 .idea-card {
-  
+  padding: 0 10px 0 10px;
+  margin: 0;
 }
+
+.card-title {
+
+}
+
+.card-body {
+
+}
+
+.buttons-style {
+  background-size: 20px;
+  height: 30px;
+  width: 30px;
+
+}
+
+.delete-button {
+  background-image: url(images/delete.svg);
+}
+
+.delet-button:hover {
+  background-image: url(images/delete-hover.svg);
+}
+
+.upvote-button {
+  background-image: url(images/upvote.svg);
+}
+
+.upvote-button:hover {
+  background-image: url(images/upvote-hover.svg);
+}
+
+.downvote-button{
+  background-image: url(images/downvote.svg);
+}
+
+.downvote-button:hover {
+  background-image: url(images/downvote-hover.svg);
+}
+
