@@ -15,7 +15,7 @@ function ideaBox() {
   var $downVoteButton = $('.downvote-button');
   var $cardContainer = $('.idea-card')
 
-  $saveButton.on('click', createIdeaCard);
+  $saveButton.on('click', appendIdeaCard);
   $bodyInput.on('keyup', toggleSaveButton);
   $titleInput.on('click', toggleSaveButton);
   // $cardContainer.on('click', '.delete-button', deleteCard);
@@ -24,9 +24,23 @@ function ideaBox() {
 
 
 
-  function createIdeaCard(event) {
+  function appendIdeaCard(event) {
     event.preventDefault();
-    console.log('hello')
+    
+    var title = $titleInput.val();
+    var body = $bodyInput.val();
+
+    $cardContainer.append(`
+      <li>
+        <h1 class="card-title">${title}</h1>
+        <button class="delete-button buttons-style"></button>
+        <p class="card-body">${body}</p>
+        <button class="upvote-button buttons-style up-down-style"></button>
+        <button class="downvote-button buttons-style up-down-style"></button>
+        <p class="quality">quality:<span class="quality-value">swill</span></p>
+        <hr>
+      </li>
+    `)
   }
 
 
