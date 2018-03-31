@@ -2,7 +2,6 @@ ideaBox();
 
 
 function ideaBox() {
-  
   var $titleInput = $('.title-input');
   var $bodyInput = $('.body-input');
   var $saveButton = $('.submit-button'); 
@@ -17,6 +16,7 @@ function ideaBox() {
   $cardContainer.on('click', 'li .delete-button', deleteCard);
   $cardContainer.on('click', 'li .upvote-button', upVote);
   $cardContainer.on('click', '.downvote-button', downVote);
+  $cardContainer.on('blur', 'li .card-body', submitEditedText);
 
 
 
@@ -30,7 +30,7 @@ function ideaBox() {
       <li>
         <h1 class="card-title">${title}</h1>
         <button class="delete-button buttons-style"></button>
-        <p class="card-body">${body}</p>
+        <p contenteditable="true" class="card-body">${body}</p>
         <button class="upvote-button buttons-style up-down-style"></button>
         <button class="downvote-button buttons-style up-down-style"></button>
         <p class="quality">quality:<span class="quality-value">swill</span></p>
@@ -40,9 +40,13 @@ function ideaBox() {
     };
 
 
+  function submitEditedText() {
+    $bodyText.text()
+  };
+  
   function upVote() {
     var $quality = $('.quality-value');
-    var qualityValue = $quality.html()
+    var qualityValue = $quality.text()
 
     if (qualityValue === 'swill') {
       $quality.text('plausible');
