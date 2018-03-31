@@ -10,7 +10,7 @@ function ideaBox() {
   var $cardTitle = $('.card-title');
   var $cardBody = $('.card-body');
   var $deleteButton = $('.delete-button');
-  var $qualityValue = $('.quality-value'); 
+  var $quality = $('.quality-value'); 
   var $upVoteButton = $('.upvote-button');
   var $downVoteButton = $('.downvote-button');
   var $cardContainer = $('.idea-card')
@@ -18,7 +18,7 @@ function ideaBox() {
   $saveButton.on('click', appendIdeaCard);
   $bodyInput.on('keyup', toggleSaveButton);
   $titleInput.on('click', toggleSaveButton);
-  // $cardContainer.on('click', '.delete-button', deleteCard);
+  $cardContainer.on('click', 'li .delete-button', deleteCard);
   // $cardContainer.on('click', '.upvote-button', upVote);
   // $cardContainer.on('click', '.downvote-button', downVote);
 
@@ -40,9 +40,14 @@ function ideaBox() {
         <p class="quality">quality:<span class="quality-value">swill</span></p>
         <hr>
       </li>
-    `)
-  }
+    `);
+    };
 
+
+
+  function deleteCard() {
+    this.closest('li').remove()
+  };
 
   function toggleSaveButton() {
 
