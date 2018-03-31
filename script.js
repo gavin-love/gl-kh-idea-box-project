@@ -2,9 +2,10 @@ ideaBox();
 
 
 function ideaBox() {
+  
   var $titleInput = $('.title-input');
   var $bodyInput = $('.body-input');
-  var $saveButton = $('.sumbit-button'); 
+  var $saveButton = $('.submit-button'); 
   var $searchInput = $('.search-input');
   var $cardTitle = $('.card-title');
   var $cardBody = $('.card-body');
@@ -17,40 +18,26 @@ function ideaBox() {
   $saveButton.on('click', createIdeaCard);
   $bodyInput.on('keyup', toggleSaveButton);
   $titleInput.on('click', toggleSaveButton);
-  $cardContainer.on('click', '.delete-button', deleteCard);
-  $cardContainer.on('click', '.upvote-button', upVote);
-  $cardContainer.on('click', '.downvote-button', downVote);
-
-
-// function toggleSaveButton() {
-//   if ($titleInput.val() && $bodyInput.val())
-//     $saveButton.prop('disabled', false);
-//   else {
-//     $saveButton.prop('disabled', true);
-//   };
-//   };
-
-
-// var title = $titleInput.val()
+  // $cardContainer.on('click', '.delete-button', deleteCard);
+  // $cardContainer.on('click', '.upvote-button', upVote);
+  // $cardContainer.on('click', '.downvote-button', downVote);
 
 
 
+  function createIdeaCard(event) {
+    event.preventDefault();
+    console.log('hello')
+  }
 
 
+  function toggleSaveButton() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+    if ($titleInput.val() && $bodyInput.val())
+      $saveButton.prop('disabled', false);
+    else {
+      $saveButton.prop('disabled', true);
+    };
+  };
+ 
 };
 
