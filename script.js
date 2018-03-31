@@ -41,7 +41,8 @@ function ideaBox() {
 
 
   function submitEditedText() {
-    $bodyText.text()
+    var editedText = $('.card-body');
+    console.log(editedText.text());
   };
   
   function upVote() {
