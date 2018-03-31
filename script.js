@@ -9,18 +9,14 @@ function ideaBox() {
   var $searchInput = $('.search-input');
   var $cardTitle = $('.card-title');
   var $cardBody = $('.card-body');
-  var $deleteButton = $('.delete-button');
-  var $quality = $('.quality-value'); 
-  var $upVoteButton = $('.upvote-button');
-  var $downVoteButton = $('.downvote-button');
   var $cardContainer = $('.idea-card')
 
   $saveButton.on('click', appendIdeaCard);
   $bodyInput.on('keyup', toggleSaveButton);
   $titleInput.on('click', toggleSaveButton);
   $cardContainer.on('click', 'li .delete-button', deleteCard);
-  // $cardContainer.on('click', '.upvote-button', upVote);
-  // $cardContainer.on('click', '.downvote-button', downVote);
+  $cardContainer.on('click', 'li .upvote-button', upVote);
+  $cardContainer.on('click', '.downvote-button', downVote);
 
 
 
@@ -44,6 +40,27 @@ function ideaBox() {
     };
 
 
+  function upVote() {
+    var $quality = $('.quality-value');
+    var qualityValue = $quality.html()
+
+    if (qualityValue === 'swill') {
+      $quality.text('plausible');
+    } else if (qualityValue === 'plausible') {
+      $quality.text('Genius');
+    };
+  };
+
+  function downVote() {
+    var $quality = $('.quality-value');
+    var qualityValue = $quality.html()
+
+    if (qualityValue === 'Genius') {
+      $quality.text('plausible');
+    } else if (qualityValue === 'plausible') {
+      $quality.text('swill');
+    };
+  };
 
   function deleteCard() {
     this.closest('li').remove()
