@@ -15,7 +15,7 @@ function ideaBox() {
   $titleInput.on('click', toggleSaveButton);
   $cardContainer.on('click', 'li .delete-button', deleteCard);
   $cardContainer.on('click', 'li .upvote-button', upVote);
-  $cardContainer.on('click', '.downvote-button', downVote);
+  $cardContainer.on('click', 'li .downvote-button', downVote);
   $cardContainer.on('blur', 'li .card-body', submitEditedText);
 
 
@@ -46,29 +46,29 @@ function ideaBox() {
   };
   
   function upVote() {
-    var $quality = $('.quality-value');
-    var qualityValue = $quality.text()
+    var quality = $(this).siblings('p').children('span');
 
-    if (qualityValue === 'swill') {
-      $quality.text('plausible');
-    } else if (qualityValue === 'plausible') {
-      $quality.text('Genius');
+    if ( quality.html() === 'swill') {
+        $(this).siblings('p').children('span').html('plausible');
+        quality = $(this).siblings('p').children('span').html('plausible')
+    } else if (quality.html() === 'plausible') {
+        $(this).siblings('p').children('span').html('Genius');
     };
   };
 
   function downVote() {
-    var $quality = $('.quality-value');
-    var qualityValue = $quality.html()
+    var quality = $(this).siblings('p').children('span');
 
-    if (qualityValue === 'Genius') {
-      $quality.text('plausible');
-    } else if (qualityValue === 'plausible') {
-      $quality.text('swill');
+    if ( quality.html() === 'Genius') {
+        $(this).siblings('p').children('span').html('plausible');
+        quality = $(this).siblings('p').children('span').html('plausible')
+    } else if (quality.html() === 'plausible') {
+        $(this).siblings('p').children('span').html('swill');
     };
   };
 
   function deleteCard() {
-    this.closest('li').remove()
+    $(this).closest('li').remove()
   };
 
   function toggleSaveButton() {
