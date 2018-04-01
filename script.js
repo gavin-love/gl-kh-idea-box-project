@@ -16,21 +16,31 @@ function ideaBox() {
   $cardContainer.on('click', 'li .delete-button', deleteCard);
   $cardContainer.on('click', 'li .upvote-button', upVote);
   $cardContainer.on('click', 'li .downvote-button', downVote);
-  $cardContainer.on('blur', 'li .card-body', submitEditedText);
+  $cardContainer.on('blur', 'li .card-title', editText);
+  $cardContainer.on('blur', 'li .card-body', editText);
 
+  function IdeaCard(object) {
+    this.id = object.id;
+    this.title = object.title;
+    this.body = object.body;
+  }
 
 
   function appendIdeaCard(event) {
     event.preventDefault();
-    
+    var id = $.now();
     var title = $titleInput.val();
     var body = $bodyInput.val();
 
+    var card = new IdeaCard({id: id, title: title, body: body});
+
+    console.log(card);
+
     $cardContainer.append(`
       <li>
-        <h1 class="card-title">${title}</h1>
+        <h1 contenteditable="true" class="card-title">${card.title}</h1>
         <button class="delete-button buttons-style"></button>
-        <p contenteditable="true" class="card-body">${body}</p>
+        <p contenteditable="true" class="card-body">${card.body}</p>
         <button class="upvote-button buttons-style up-down-style"></button>
         <button class="downvote-button buttons-style up-down-style"></button>
         <p class="quality">quality:<span class="quality-value">swill</span></p>
@@ -40,8 +50,8 @@ function ideaBox() {
     };
 
 
-  function submitEditedText() {
-    var editedText = $('.card-body');
+  function editText() {
+    var editedText = $('.card-title, .card-body');
     console.log(editedText.text());
   };
   
@@ -79,6 +89,11 @@ function ideaBox() {
       $saveButton.prop('disabled', true);
     };
   };
+
+  
+  function sendToLocalStorage() {
+    var objectToStore = $('li')
+  }
  
 };
 
