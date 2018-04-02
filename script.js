@@ -8,7 +8,7 @@ function ideaBox() {
   var $searchInput = $('.search-input');
   var $cardTitle = $('.card-title');
   var $cardBody = $('.card-body');
-  var $cardContainer = $('.idea-card')
+  var $cardContainer = $('.idea-card');
 
   $saveButton.on('click', appendIdeaCard);
   $bodyInput.on('keyup', toggleSaveButton);
@@ -18,6 +18,9 @@ function ideaBox() {
   $cardContainer.on('click', 'li .downvote-button', downVote);
   $cardContainer.on('blur', 'li .card-title', editText);
   $cardContainer.on('blur', 'li .card-body', editText);
+  var keyCounter = "'card#' + cardCounter"
+  var cardCounter = 0
+
 
   function IdeaCard(object) {
     this.id = object.id;
@@ -34,10 +37,8 @@ function ideaBox() {
 
     var card = new IdeaCard({id: id, title: title, body: body});
 
-    console.log(card);
-
     $cardContainer.append(`
-      <li>
+      <li id=${id}>
         <h1 contenteditable="true" class="card-title">${card.title}</h1>
         <button class="delete-button buttons-style"></button>
         <p contenteditable="true" class="card-body">${card.body}</p>
@@ -47,15 +48,23 @@ function ideaBox() {
         <hr>
       </li>
     `);
+
+    console.log($('li'));
+
+
+
+    sendToLocalStorage(card,id);
+    
     };
 
 
   function editText() {
     var editedText = $('.card-title, .card-body');
-    console.log(editedText.text());
+  
   };
   
   function upVote() {
+
     var quality = $(this).siblings('p').children('span');
 
     if ( quality.html() === 'swill') {
@@ -79,6 +88,7 @@ function ideaBox() {
 
   function deleteCard() {
     $(this).closest('li').remove()
+
   };
 
   function toggleSaveButton() {
@@ -91,8 +101,16 @@ function ideaBox() {
   };
 
   
-  function sendToLocalStorage() {
-    var objectToStore = $('li')
+  function sendToLocalStorage(card,id) {
+    var objectToStore = card;
+    var stringifiedObject = JSON.stringify(objectToStore);
+
+    localStorage.setItem(id, stringifiedObject)
+  }
+
+  function getFromLocalStorage() {
+    var retrievedObject = localStorage.getItem();
+
   }
  
 };
