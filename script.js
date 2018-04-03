@@ -1,5 +1,5 @@
-ideaBox();
 
+ideaBox();
 
 function ideaBox() {
   var $titleInput = $('.title-input');
@@ -9,8 +9,10 @@ function ideaBox() {
   var $cardTitle = $('.card-title');
   var $cardBody = $('.card-body');
   var $cardContainer = $('.idea-card');
+  var string;
+  var object;
 
-  $saveButton.on('click', appendIdeaCard);
+  $saveButton.on('click', getIdeaTitleBody);
   $bodyInput.on('keyup', toggleSaveButton);
   $titleInput.on('click', toggleSaveButton);
   $cardContainer.on('click', 'li .delete-button', deleteCard);
@@ -18,77 +20,80 @@ function ideaBox() {
   $cardContainer.on('click', 'li .downvote-button', downVote);
   $cardContainer.on('blur', 'li .card-title', editText);
   $cardContainer.on('blur', 'li .card-body', editText);
-  var keyCounter = "'card#' + cardCounter"
-  var cardCounter = 0
-
 
   function IdeaCard(object) {
     this.id = object.id;
     this.title = object.title;
     this.body = object.body;
+    this.quality = object.quality;
   }
 
 
-  function appendIdeaCard(event) {
+  function getIdeaTitleBody(event) {
     event.preventDefault();
-    var id = $.now();
-    var title = $titleInput.val();
-    var body = $bodyInput.val();
+    id = $.now();
+    title = $titleInput.val();
+    body = $bodyInput.val();
+    quality = 'swill';
 
-    var card = new IdeaCard({id: id, title: title, body: body});
+    var card = new IdeaCard({id: id, title: title, body: body, quality: quality});
 
+    appendCard(card);
+    sendToLocalStorage(card,id);
+    };
+
+  function appendCard(object) {
     $cardContainer.append(`
-      <li id=${id}>
-        <h1 contenteditable="true" class="card-title">${card.title}</h1>
+      <li id=${object.id}>
+        <h1 contenteditable="true" class="card-title">${object.title}</h1>
         <button class="delete-button buttons-style"></button>
-        <p contenteditable="true" class="card-body">${card.body}</p>
+        <p contenteditable="true" class="card-body">${object.body}</p>
         <button class="upvote-button buttons-style up-down-style"></button>
         <button class="downvote-button buttons-style up-down-style"></button>
         <p class="quality">quality:<span class="quality-value">swill</span></p>
         <hr>
       </li>
     `);
-
-    console.log($('li'));
-
-
-
-    sendToLocalStorage(card,id);
-    
-    };
-
-
-  function editText() {
-    var editedText = $('.card-title, .card-body');
-  
   };
-  
+
   function upVote() {
+    pullFromLocalStorage(this);
 
     var quality = $(this).siblings('p').children('span');
 
     if ( quality.html() === 'swill') {
         $(this).siblings('p').children('span').html('plausible');
         quality = $(this).siblings('p').children('span').html('plausible')
+        object.quality = 'plausible';
     } else if (quality.html() === 'plausible') {
         $(this).siblings('p').children('span').html('Genius');
+        object.quality = 'Genius';
     };
+
+    updateLocalStorage(object);
   };
 
   function downVote() {
+    pullFromLocalStorage(this);
+
     var quality = $(this).siblings('p').children('span');
 
     if ( quality.html() === 'Genius') {
         $(this).siblings('p').children('span').html('plausible');
         quality = $(this).siblings('p').children('span').html('plausible')
+        object.quality = 'plausible';
     } else if (quality.html() === 'plausible') {
         $(this).siblings('p').children('span').html('swill');
+        object.quality = 'swill';
     };
+
+    updateLocalStorage(object);
   };
 
   function deleteCard() {
-    $(this).closest('li').remove()
+    deleteCardStorage(this);
 
+    $(this).closest('li').remove()
   };
 
   function toggleSaveButton() {
@@ -100,18 +105,53 @@ function ideaBox() {
     };
   };
 
-  
+  function editText() {
+    title = $(this).text();
+    body = $(this).text();
+
+    pullFromLocalStorage(this);
+
+    object.title = title;
+    object.body = body;
+
+    updateLocalStorage(object);
+  };
+
+  function initPageLoad() {
+    for (var i = 0; i < localStorage.length; i++) {
+      string = localStorage.getItem(localStorage.key(i));
+      object = JSON.parse(string);
+
+      appendCard(object);
+    };
+  };
+
   function sendToLocalStorage(card,id) {
-    var objectToStore = card;
-    var stringifiedObject = JSON.stringify(objectToStore);
+    var cardToStore = card;
+    var stringifiedCard = JSON.stringify(cardToStore);
 
-    localStorage.setItem(id, stringifiedObject)
-  }
+    localStorage.setItem(id, stringifiedCard);
+  };
 
-  function getFromLocalStorage() {
-    var retrievedObject = localStorage.getItem();
-
-  }
+  function deleteCardStorage(that) {
+    var id = $(that).closest('li').attr('id');
  
+    string = localStorage.removeItem(id);   
+  };
+
+  function pullFromLocalStorage(that) {
+    var id = $(that).closest('li').attr('id');
+ 
+    string = localStorage.getItem(id);
+    object = JSON.parse(string);
+  };
+
+  function updateLocalStorage(object) {
+    string = JSON.stringify(object);
+
+    localStorage.setItem(object.id, string)
+  };
+
+  initPageLoad();
 };
 
