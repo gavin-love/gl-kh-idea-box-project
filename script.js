@@ -18,14 +18,15 @@ function ideaBox() {
   $cardContainer.on('click', 'li .delete-button', deleteCard);
   $cardContainer.on('click', 'li .upvote-button', upVote);
   $cardContainer.on('click', 'li .downvote-button', downVote);
-  $cardContainer.on('blur', 'li .card-title', editText);
-  $cardContainer.on('blur', 'li .card-body', editText);
+  $cardContainer.on('blur', 'li .card-title', editTitle);
+  $cardContainer.on('blur', 'li .card-body', editBody);
+  $searchInput.on('keyup', searchLocalStorage);
 
   function IdeaCard(object) {
     this.id = object.id;
     this.title = object.title;
     this.body = object.body;
-    this.quality = object.quality;
+    this.quality = object.quality || 'swill';
   }
 
 
@@ -38,19 +39,20 @@ function ideaBox() {
 
     var card = new IdeaCard({id: id, title: title, body: body, quality: quality});
 
-    appendCard(card);
+    prependCard(card);
     sendToLocalStorage(card,id);
+    resetForm();
     };
 
-  function appendCard(object) {
-    $cardContainer.append(`
+  function prependCard(object) {
+    $cardContainer.prepend(`
       <li id=${object.id}>
         <h1 contenteditable="true" class="card-title">${object.title}</h1>
         <button class="delete-button buttons-style"></button>
         <p contenteditable="true" class="card-body">${object.body}</p>
         <button class="upvote-button buttons-style up-down-style"></button>
         <button class="downvote-button buttons-style up-down-style"></button>
-        <p class="quality">quality:<span class="quality-value">swill</span></p>
+        <p class="quality">quality:<span class="quality-value">${object.quality}</span></p>
         <hr>
       </li>
     `);
@@ -105,15 +107,17 @@ function ideaBox() {
     };
   };
 
-  function editText() {
+  function editTitle() {
     title = $(this).text();
-    body = $(this).text();
-
     pullFromLocalStorage(this);
-
     object.title = title;
-    object.body = body;
+    updateLocalStorage(object);
+  };
 
+    function editBody() {
+    body = $(this).text();
+    pullFromLocalStorage(this);
+    object.body = body;
     updateLocalStorage(object);
   };
 
@@ -122,7 +126,7 @@ function ideaBox() {
       string = localStorage.getItem(localStorage.key(i));
       object = JSON.parse(string);
 
-      appendCard(object);
+      prependCard(object);
     };
   };
 
@@ -150,6 +154,17 @@ function ideaBox() {
     string = JSON.stringify(object);
 
     localStorage.setItem(object.id, string)
+  };
+
+  function searchLocalStorage() {
+    $("li:contains('"+ $searchInput.val() +"')").show();
+    $("li:not(:contains('"+ $searchInput.val() +"'))").hide();
+  };
+
+  function resetForm() {
+    $titleInput.val('');
+    $bodyInput.val('');
+    $titleInput.focus();
   };
 
   initPageLoad();
