@@ -14,7 +14,6 @@ function ideaBox() {
 
   $saveButton.on('click', getIdeaTitleBody);
   $bodyInput.on('keyup', toggleSaveButton);
-  $titleInput.on('click', toggleSaveButton);
   $cardContainer.on('click', 'li .delete-button', deleteCard);
   $cardContainer.on('click', 'li .upvote-button', upVote);
   $cardContainer.on('click', 'li .downvote-button', downVote);
@@ -165,6 +164,7 @@ function ideaBox() {
     $titleInput.val('');
     $bodyInput.val('');
     $titleInput.focus();
+    toggleSaveButton();
   };
 
   initPageLoad();
