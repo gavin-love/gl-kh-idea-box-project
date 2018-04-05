@@ -11,7 +11,7 @@ html, body {
 }
 
 .title-idea,
-.tittle-box {
+.title-box {
   font-family: 'Robot Slab', serif;
   font-weight: bold 700;
 }
@@ -33,10 +33,13 @@ hr {
 
 /*Title, inputs, and submit button*/
 
-.title-idea {
-  width: 50%;
+.title {
   text-align: center;
-  margin: 0 auto 25px auto;
+  margin-bottom: 25px;
+}
+
+.title-idea {
+  margin: 0;
   font-size: 4.5em;
   color: #00A79D;
 }
@@ -167,4 +170,43 @@ li {
   display: inline-block;
   color: #6D6E71;
 }
+
+@media only screen and (max-width: 900px) {
+    .inputs-container,
+    .search-container,
+    .cards-container {
+      width: 80%;
+      margin: auto;
+    }
+
+    .title-idea {
+      font-size: 6.5em;
+    }
+
+    .title {
+      margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .inputs-container,
+    .search-container,
+    .cards-container {
+      width: 90%;
+      margin: auto;
+    }
+
+    .cards-container {
+      overflow-y: visible;
+    }
+
+    .title-idea {
+      font-size: 4.5em;
+    }
+
+    .title {
+      margin-bottom: 20px;
+    }
+}
+
 
