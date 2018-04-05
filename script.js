@@ -28,14 +28,12 @@ function ideaBox() {
     this.quality = object.quality || 'swill';
   }
 
-
   function getIdeaTitleBody(event) {
     event.preventDefault();
     id = $.now();
     title = $titleInput.val();
     body = $bodyInput.val();
     quality = 'swill';
-
     var card = new IdeaCard({id: id, title: title, body: body, quality: quality});
 
     prependCard(card);
@@ -59,9 +57,7 @@ function ideaBox() {
 
   function upVote() {
     pullFromLocalStorage(this);
-
     var quality = $(this).siblings('p').children('span');
-
     if ( quality.html() === 'swill') {
         $(this).siblings('p').children('span').html('plausible');
         quality = $(this).siblings('p').children('span').html('plausible')
@@ -70,13 +66,11 @@ function ideaBox() {
         $(this).siblings('p').children('span').html('Genius');
         object.quality = 'Genius';
     };
-
     updateLocalStorage(object);
   };
 
   function downVote() {
     pullFromLocalStorage(this);
-
     var quality = $(this).siblings('p').children('span');
 
     if ( quality.html() === 'Genius') {
@@ -87,18 +81,15 @@ function ideaBox() {
         $(this).siblings('p').children('span').html('swill');
         object.quality = 'swill';
     };
-
     updateLocalStorage(object);
   };
 
   function deleteCard() {
     deleteCardStorage(this);
-
     $(this).closest('li').remove()
   };
 
   function toggleSaveButton() {
-
     if ($titleInput.val() && $bodyInput.val())
       $saveButton.prop('disabled', false);
     else {
@@ -124,7 +115,6 @@ function ideaBox() {
     for (var i = 0; i < localStorage.length; i++) {
       string = localStorage.getItem(localStorage.key(i));
       object = JSON.parse(string);
-
       prependCard(object);
     };
   };
@@ -132,26 +122,22 @@ function ideaBox() {
   function sendToLocalStorage(card,id) {
     var cardToStore = card;
     var stringifiedCard = JSON.stringify(cardToStore);
-
     localStorage.setItem(id, stringifiedCard);
   };
 
   function deleteCardStorage(that) {
     var id = $(that).closest('li').attr('id');
- 
     string = localStorage.removeItem(id);   
   };
 
   function pullFromLocalStorage(that) {
     var id = $(that).closest('li').attr('id');
- 
     string = localStorage.getItem(id);
     object = JSON.parse(string);
   };
 
   function updateLocalStorage(object) {
     string = JSON.stringify(object);
-
     localStorage.setItem(object.id, string)
   };
 
