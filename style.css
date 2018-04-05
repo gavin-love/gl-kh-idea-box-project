@@ -1,9 +1,9 @@
 html, body {
-  width: 100%;
+  box-sizing: border-box;
   max-width: 1440px;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  width: 100%;
 }
 
 .body {
@@ -21,27 +21,27 @@ hr {
 }
 
 .top {
-  width: 100%;
-  padding: 25px 0 25px 0;
   background-color: #E5F3F2
+  padding: 25px 0 25px 0;
+  width: 100%;
 }
 
 .inputs-container {
-  width: 50%;
   margin: auto;
+  width: 50%;
 }
 
 /*Title, inputs, and submit button*/
 
 .title {
-  text-align: center;
   margin-bottom: 25px;
+  text-align: center;
 }
 
 .title-idea {
-  margin: 0;
-  font-size: 4.5em;
   color: #00A79D;
+  font-size: 4.5em;
+  margin: 0;
 }
 
 .title-box {
@@ -56,23 +56,23 @@ input {
 .inputs-styling {
   border: 2px solid #939598;
   font-size: 1.5em;
-  width: 99.5%;
-  margin-bottom: 20px;
   height: 30px;
+  margin-bottom: 20px;
+  width: 99.5%;
 }
 
 .inputs-styling::placeholder {
-  padding-left: 10px;
   color: #939598;
+  padding-left: 10px;
 }
 
 .submit-button {
-  width: 100%;
-  height: 35px;
   background: #00A79D;
-  margin-bottom: 25px;
   color: #FFFFFF;
   font-size: 1.7em;
+  height: 35px;
+  margin-bottom: 25px;
+  width: 100%;
 }
 
 .submit-button:hover {
@@ -82,22 +82,22 @@ input {
 
 .bottom {
   height: 100vh;
-  width: 100%;
   padding: 25px 0;
+  width: 100%;
 }
 
 .search-container {
-  width: 50%;
   margin: auto;
+  width: 50%;
 }
 
 
 .cards-container {
-  height: 100vh;
-  width: 50%;
   background-color: #FFFFFF;
+  height: 100vh;
   margin: auto;
   overflow-y: scroll;
+  width: 50%;
 }
 
 /*card container sytling*/
@@ -106,37 +106,37 @@ li {
   list-style-type: none;
 }
 .idea-card {
-  padding: 20px 0 20px 0;
   margin: 0;
+  padding: 20px 0 20px 0;
 }
 
 .card-title {
+  color: #6D6E71
   display: inline-block;
   margin: 0;
-  color: #6D6E71
 }
 
 .card-body {
-  margin: 30px 0;
   color: #939598;
+  margin: 30px 0;
 
 }
 
 .buttons-style {
-  outline: none;
-  border: none;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 25px;
+  border: none;
   height: 30px;
+  outline: none;
   width: 30px;
 
 }
 
 .delete-button {
-  float: right;
-  display: inline-block;
   background-image: url(images/delete.svg);
+  display: inline-block;
+  float: right;
 }
 
 .delete-button:hover {
@@ -152,8 +152,8 @@ li {
 }
 
 .downvote-button{
-  margin: 0 10px;
   background-image: url(images/downvote.svg);
+  margin: 0 10px;
 }
 
 .downvote-button:hover {
@@ -167,16 +167,16 @@ li {
 }
 
 .quality {
-  display: inline-block;
   color: #6D6E71;
+  display: inline-block;
 }
 
 @media only screen and (max-width: 900px) {
     .inputs-container,
     .search-container,
     .cards-container {
-      width: 80%;
       margin: auto;
+      width: 80%;
     }
 
     .title-idea {
@@ -192,8 +192,8 @@ li {
     .inputs-container,
     .search-container,
     .cards-container {
-      width: 90%;
       margin: auto;
+      width: 90%;
     }
 
     .cards-container {
