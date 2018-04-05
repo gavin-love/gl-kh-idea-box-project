@@ -6,6 +6,20 @@ html, body {
   box-sizing: border-box;
 }
 
+.body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.title-idea,
+.tittle-box {
+  font-family: 'Robot Slab', serif;
+  font-weight: bold 700;
+}
+
+hr {
+  color: #D1D3D4;
+}
+
 .top {
   width: 100%;
   padding: 25px 0 25px 0;
@@ -38,13 +52,13 @@ input {
 
 .inputs-styling {
   border: 2px solid #939598;
+  font-size: 1.5em;
   width: 99.5%;
   margin-bottom: 20px;
   height: 30px;
 }
 
 .inputs-styling::placeholder {
-  font-size: 2em;
   padding-left: 10px;
   color: #939598;
 }
@@ -80,6 +94,7 @@ input {
   width: 50%;
   background-color: #FFFFFF;
   margin: auto;
+  overflow-y: scroll;
 }
 
 /*card container sytling*/
@@ -95,10 +110,12 @@ li {
 .card-title {
   display: inline-block;
   margin: 0;
+  color: #6D6E71
 }
 
 .card-body {
   margin: 30px 0;
+  color: #939598;
 
 }
 
@@ -114,10 +131,8 @@ li {
 }
 
 .delete-button {
+  float: right;
   display: inline-block;
-  position: relative;
-  top: 5px;
-  left: 85%;
   background-image: url(images/delete.svg);
 }
 
@@ -150,5 +165,6 @@ li {
 
 .quality {
   display: inline-block;
+  color: #6D6E71;
 }
 
