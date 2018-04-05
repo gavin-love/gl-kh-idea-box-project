@@ -97,7 +97,6 @@ input {
   width: 50%;
   background-color: #FFFFFF;
   margin: auto;
-  overflow-y: scroll;
 }
 
 /*card container sytling*/
@@ -194,10 +193,6 @@ li {
     .cards-container {
       width: 90%;
       margin: auto;
-    }
-
-    .cards-container {
-      overflow-y: visible;
     }
 
     .title-idea {
